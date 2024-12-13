@@ -12,7 +12,13 @@ namespace Mechadroids {
         public InputActions InputActions => inputActions;
 
         public void Initialize() {
-            // initialize input here
+            inputActions = new InputActions();
+            inputActions.Enable();
+            inputActions.Player.Move.performed += ctx => MovementInput = ctx.ReadValue<Vector2>();
+            inputActions.Player.Move.canceled += ctx => MovementInput = Vector2.zero;
+
+            inputActions.Player.Look.performed += ctx => MouseDelta = ctx.ReadValue<Vector2>();
+            inputActions.Player.Look.canceled += ctx => MouseDelta = Vector2.zero;
         }
 
         public void SetCursorState(bool visibility, CursorLockMode lockMode) {
