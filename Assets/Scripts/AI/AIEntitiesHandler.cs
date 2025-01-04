@@ -7,6 +7,7 @@ namespace Mechadroids {
         private readonly AISettings aiSettings;
         private readonly Transform parentHolder;
         private Transform playerTransform;
+        private int dictIndex = 0;
 
         private Dictionary<int, EnemyEntityHandler> EnemyEntityHandlers { get; } = new();
 
@@ -17,18 +18,31 @@ namespace Mechadroids {
         }
 
         public void Initialize() {
-            // initialize all enemies here
+
             playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
-            int globalindex = 0;
+            Object.FindObjectsOfType<EnemySpawner>();
+            foreach(EnemySpawner spawner in Object.FindObjectsOfType<EnemySpawner>()) {
+                spawner.aiEntitiesHandler = this;
+            }
+            /*int globalindex = 0;
             foreach(EnemyGroup enemy in aiSettings.enemiesToSpawn) {
                 for(int i = 0; i < enemy.enemyCount; i++) {
                     EnemyEntityHandler enemyEntityHandler = new(enemy.enemySettings, parentHolder, playerTransform);
                     enemyEntityHandler.Initialize();
-                    EnemyEntityHandlers.TryAdd(globalindex, enemyEntityHandler);
-                    globalindex++;
+                    EnemyEntityHandlers.TryAdd(dictIndex, enemyEntityHandler);
+                    dictIndex++;
                 }
-            }
+            }*/
 
+        }
+
+        public void SpawnEnemyGroup(EnemyGroup group) {
+            for(int i = 0; i < group.enemyCount; i++) {
+                EnemyEntityHandler enemyEntityHandler = new(group.enemySettings, parentHolder, playerTransform);
+                enemyEntityHandler.Initialize();
+                EnemyEntityHandlers.TryAdd(dictIndex, enemyEntityHandler);
+                dictIndex++;
+            }
         }
 
         public void Tick() {

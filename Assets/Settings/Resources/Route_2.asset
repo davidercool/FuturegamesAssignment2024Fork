@@ -14,6 +14,6 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   routeId: 2
   routePoints:
-  - {x: -1, y: 3, z: -10}
-  - {x: -10, y: 3, z: -10}
+  - {x: 15, y: 3, z: 20}
+  - {x: 40, y: 3, z: 25}
   showGizmo: 0
