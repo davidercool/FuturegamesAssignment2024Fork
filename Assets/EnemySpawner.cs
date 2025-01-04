@@ -9,6 +9,7 @@ public class EnemySpawner : MonoBehaviour
     private void OnTriggerEnter(Collider other) {
         if(other.tag == "Player") {
             aiEntitiesHandler.SpawnEnemyGroup(enemyGroup);
+            Destroy(gameObject);
         }
     }
 }
