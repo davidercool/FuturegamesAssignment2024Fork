@@ -12,4 +12,8 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: 28c707da301a41018336a41d96291d1a, type: 3}
   m_Name: AISettings
   m_EditorClassIdentifier: 
-  enemiesToSpawn: []
+  enemiesToSpawn:
+  - enemySettings: {fileID: 11400000, guid: abf873976b442574b9b25eb7635e3c34, type: 2}
+    enemyCount: 1
+  - enemySettings: {fileID: 11400000, guid: a052045e76313024cba57a31aca3e477, type: 2}
+    enemyCount: 1

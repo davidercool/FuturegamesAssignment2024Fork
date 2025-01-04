@@ -9,12 +9,14 @@ namespace Mechadroids {
         private readonly EnemySettings enemySettings;
         private readonly Transform parentHolder;
         private EnemyReference enemyReference;
+        private Transform playerTransform;
 
         public IEntityState EntityState { get; set; }
 
-        public EnemyEntityHandler(EnemySettings enemySettings, Transform parentHolder) {
+        public EnemyEntityHandler(EnemySettings enemySettings, Transform parentHolder, Transform playerTransform) {
             this.enemySettings = enemySettings;
             this.parentHolder = parentHolder;
+            this.playerTransform = playerTransform;
         }
 
         public void Initialize() {
@@ -22,7 +24,7 @@ namespace Mechadroids {
             enemyReference.transform.position = enemySettings.routeSettings.routePoints[0];
 
             // Initialize the default state (Idle State)
-            EntityState = new EnemyIdleState(this, enemyReference);
+            EntityState = new EnemyIdleState(this, enemyReference, playerTransform);
             EntityState.Enter();
         }
 

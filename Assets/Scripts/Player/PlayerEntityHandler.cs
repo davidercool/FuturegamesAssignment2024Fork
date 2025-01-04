@@ -36,7 +36,7 @@ namespace Mechadroids {
 
             hitIndicatorInstance = Object.Instantiate(playerPrefabs.hitIndicatorPrefab);
             hitIndicatorInstance.gameObject.SetActive(false);
-            EntityState = new PlayerActiveState(this, inputHandler, playerReference, hitIndicatorInstance);
+            EntityState = new PlayerIdleState(this, inputHandler, playerReference, hitIndicatorInstance);
             EntityState.Enter();
 
 #if GAME_DEBUG
@@ -47,6 +47,36 @@ namespace Mechadroids {
         private void InitializeDebugMenu() {
             debugMenuHandler.AddUIElement(UIElementType.Single, "MoveSpeed", new float [] { playerReference.playerSettings.moveSpeed }, (newValue) => {
                 playerReference.playerSettings.moveSpeed = newValue[0];
+            });
+            debugMenuHandler.AddUIElement(UIElementType.Single, "RotationSpeed", new float [] { playerReference.playerSettings.rotationSpeed }, (newValue) => {
+                playerReference.playerSettings.rotationSpeed = newValue[0];
+            });
+            debugMenuHandler.AddUIElement(UIElementType.Single, "Acceleration", new float [] { playerReference.playerSettings.acceleration }, (newValue) => {
+                playerReference.playerSettings.acceleration = newValue[0];
+            });
+            debugMenuHandler.AddUIElement(UIElementType.Single, "Deceleration", new float [] { playerReference.playerSettings.deceleration }, (newValue) => {
+                playerReference.playerSettings.deceleration = newValue[0];
+            });
+            debugMenuHandler.AddUIElement(UIElementType.Single, "MaxSlopeAngle", new float [] { playerReference.playerSettings.maxSlopeAngle }, (newValue) => {
+                playerReference.playerSettings.maxSlopeAngle = newValue[0];
+            });
+            debugMenuHandler.AddUIElement(UIElementType.Single, "TurretRotationSpeed", new float [] { playerReference.playerSettings.turretRotationSpeed }, (newValue) => {
+                playerReference.playerSettings.turretRotationSpeed = newValue[0];
+            });
+            debugMenuHandler.AddUIElement(UIElementType.Single, "BarrelRotationSpeed", new float [] { playerReference.playerSettings.barrelRotationSpeed }, (newValue) => {
+                playerReference.playerSettings.barrelRotationSpeed = newValue[0];
+            });
+            debugMenuHandler.AddUIElement(UIElementType.Single, "MaxBarrelElevation", new float [] { playerReference.playerSettings.maxBarrelElevation }, (newValue) => {
+                playerReference.playerSettings.maxBarrelElevation = newValue[0];
+            });
+            debugMenuHandler.AddUIElement(UIElementType.Single, "MinBarrelElevation", new float [] { playerReference.playerSettings.minBarrelElevation }, (newValue) => {
+                playerReference.playerSettings.minBarrelElevation = newValue[0];
+            });
+            debugMenuHandler.AddUIElement(UIElementType.Single, "MinTurretAngle", new float [] { playerReference.playerSettings.minTurretAngle }, (newValue) => {
+                playerReference.playerSettings.minTurretAngle = newValue[0];
+            });
+            debugMenuHandler.AddUIElement(UIElementType.Single, "MaxTurretAngle", new float [] { playerReference.playerSettings.maxTurretAngle }, (newValue) => {
+                playerReference.playerSettings.maxTurretAngle = newValue[0];
             });
 
         }

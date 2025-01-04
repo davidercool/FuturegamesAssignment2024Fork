@@ -6,23 +6,29 @@ namespace Mechadroids {
     public class AIEntitiesHandler {
         private readonly AISettings aiSettings;
         private readonly Transform parentHolder;
+        private Transform playerTransform;
 
         private Dictionary<int, EnemyEntityHandler> EnemyEntityHandlers { get; } = new();
 
         public AIEntitiesHandler(AISettings aiSettings, Transform parentHolder) {
             this.aiSettings = aiSettings;
             this.parentHolder = parentHolder;
+
         }
 
         public void Initialize() {
             // initialize all enemies here
+            playerTransform = GameObject.FindGameObjectWithTag("Player").transform;
+            int globalindex = 0;
             foreach(EnemyGroup enemy in aiSettings.enemiesToSpawn) {
                 for(int i = 0; i < enemy.enemyCount; i++) {
-                    EnemyEntityHandler enemyEntityHandler = new(enemy.enemySettings, parentHolder);
+                    EnemyEntityHandler enemyEntityHandler = new(enemy.enemySettings, parentHolder, playerTransform);
                     enemyEntityHandler.Initialize();
-                    EnemyEntityHandlers.TryAdd(i, enemyEntityHandler);
+                    EnemyEntityHandlers.TryAdd(globalindex, enemyEntityHandler);
+                    globalindex++;
                 }
             }
+
         }
 
         public void Tick() {
